@@ -1,0 +1,825 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3. OPAL components description &mdash; opal 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://mathjax.connectmv.com/MathJax.js"></script>
+    <link rel="top" title="opal 0.1 documentation" href="index.html" />
+    <link rel="next" title="4. API Documentation" href="api.html" />
+    <link rel="prev" title="2. Tutorial: Simple tasks of Parameter Optimization" href="tutorial.html" />
+ 
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+  </head>
+  <body>
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<!-- <img src="_static/sphinx.png" alt="Sphinx logo" /> -->
+<h1>OPAL&mdash;Optimization of Algorithms</h1>
+
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="4. API Documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="2. Tutorial: Simple tasks of Parameter Optimization"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">OPAL home</a>&nbsp;|&nbsp;</li>
+        <li><a href="contents.html">Documentation</a>
+          &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3. OPAL components description</a><ul>
+<li><a class="reference internal" href="#module-opal.core.data">3.1. Core objects</a><ul>
+<li><a class="reference internal" href="#data">3.1.1. Data</a></li>
+<li><a class="reference internal" href="#dataset">3.1.2. DataSet</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-objects">3.2. Basic objects</a><ul>
+<li><a class="reference internal" href="#parameter">3.2.1. Parameter</a></li>
+<li><a class="reference internal" href="#measure">3.2.2. Measure</a></li>
+<li><a class="reference internal" href="#measuretable">3.2.3. MeasureTable</a></li>
+<li><a class="reference internal" href="#problem">3.2.4. Problem</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parameter-optimization-problem-definition">3.3. Parameter Optimization Problem Definition</a><ul>
+<li><a class="reference internal" href="#module-opal.core.algorithm">3.3.1. Algorithm experiment</a></li>
+<li><a class="reference internal" href="#module-opal.core.modelstructure">3.3.2. ModelStructure</a></li>
+<li><a class="reference internal" href="#module-opal.core.modeldata">3.3.3. ModelData</a></li>
+<li><a class="reference internal" href="#model">3.3.4. Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial.html"
+                        title="previous chapter">2. Tutorial: Simple tasks of Parameter Optimization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">4. API Documentation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/opal.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="opal-components-description">
+<h1>3. OPAL components description<a class="headerlink" href="#opal-components-description" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-opal.core.data">
+<span id="core-objects"></span><h2>3.1. Core objects<a class="headerlink" href="#module-opal.core.data" title="Permalink to this headline">¶</a></h2>
+<p>This module contains two classes that descriibe two  entities Data and DataSet
+Data is one of the two elementary entities in the Data-Operator methodology
+DataSet is set of data to described an object. All of data elements have the
+same storage and in/out method.</p>
+<div class="section" id="data">
+<h3>3.1.1. Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="opal.core.data.Data">
+<em class="property">class </em><tt class="descclassname">opal.core.data.</tt><tt class="descname">Data</tt><big>(</big><em>name=''</em>, <em>description=''</em>, <em>type='real'</em>, <em>dimension=1</em>, <em>value=None</em>, <em>domain=None</em>, <em>*argv</em>, <em>**kwargv</em><big>)</big><a class="headerlink" href="#opal.core.data.Data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data is one of two elementary entities. It has a name, value type and value.
+The most important methods of this class are <cite>set</cite> and <cite>get</cite>.
+The type of data may be a scalar of type integer, floating number, or 
+a vector, a matrix.</p>
+<dl class="method">
+<dt id="opal.core.data.Data.get">
+<tt class="descname">get</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.data.Data.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.Data.get_dimension">
+<tt class="descname">get_dimension</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.data.Data.get_dimension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.Data.get_domain">
+<tt class="descname">get_domain</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.data.Data.get_domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.Data.get_type">
+<tt class="descname">get_type</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.data.Data.get_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.Data.identify">
+<tt class="descname">identify</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.data.Data.identify" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method provide the identity of a Data object. By default, 
+the name is considered as the identity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.Data.set">
+<tt class="descname">set</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#opal.core.data.Data.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dataset">
+<h3>3.1.2. DataSet<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="opal.core.data.DataSet">
+<em class="property">class </em><tt class="descclassname">opal.core.data.</tt><tt class="descname">DataSet</tt><big>(</big><em>name=''</em>, <em>elements=</em><span class="optional">[</span><span class="optional">]</span>, <em>*argv</em>, <em>**kwargv</em><big>)</big><a class="headerlink" href="#opal.core.data.DataSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">opal.core.set.Set</span></tt></p>
+<p>DataSet set of data elements. It provides one more method in comparing with
+a Set object, the set_values() method. This method to update value of the
+elements belong to set</p>
+<dl class="method">
+<dt id="opal.core.data.DataSet.append">
+<tt class="descname">append</tt><big>(</big><em>elem</em><big>)</big><a class="headerlink" href="#opal.core.data.DataSet.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an element to the set</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.DataSet.remove">
+<tt class="descname">remove</tt><big>(</big><em>elem</em><big>)</big><a class="headerlink" href="#opal.core.data.DataSet.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an element from the set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.DataSet.select">
+<tt class="descname">select</tt><big>(</big><em>query</em><big>)</big><a class="headerlink" href="#opal.core.data.DataSet.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>The select is rewritten to return a DataSet object instead of
+Set object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.data.DataSet.set_values">
+<tt class="descname">set_values</tt><big>(</big><em>values=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.data.DataSet.set_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the arguments {sf values}, {sf args} and {sf kwargs} to build
+up a mapping 
+from the name to value. After that, the {sf set_value} method of each 
+element is provoked to set value for them.</p>
+<p>This method pemits to set values for a set by the following statements: 
+&gt;&gt;&gt; dataSet.set_values(1, 2, 3)           
+&gt;&gt;&gt; dataSet.set_values([1, 2, 3])
+&gt;&gt;&gt; dataSet.set_values([1, 2], 3)</p>
+<blockquote>
+<div>Assign three first elements to 1, 2 and 3.</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dataSet</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">elem4</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">    Set first three element to 1, 2 and 3 correspondingly. And set the </span>
+<span class="go">    element whose name is elem4 to 4.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataSet</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">elem5</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">    Assign 5 to the {\sf elem5} element.</span>
+</pre></div>
+</div>
+<p>The following assign is syntaxly correct but raises a logical issue
+&gt;&gt;&gt; dataSet.set_values(1, [2, 3])</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="basic-objects">
+<h2>3.2. Basic objects<a class="headerlink" href="#basic-objects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameter">
+<h3>3.2.1. Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/Users/kiendc/src/opal/doc/reference/source/opal.rst</tt>, line 39)</p>
+Could not execute &#8216;dot&#8217;.  Are you sure you have &#8216;graphviz&#8217; installed?</div>
+<span class="target" id="module-opal.core.parameter"></span><dl class="class">
+<dt id="opal.core.parameter.Parameter">
+<em class="property">class </em><tt class="descclassname">opal.core.parameter.</tt><tt class="descname">Parameter</tt><big>(</big><em>kind='real'</em>, <em>default=None</em>, <em>bound=None</em>, <em>name=None</em>, <em>description=''</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opal.core.data.Data" title="opal.core.data.Data"><tt class="xref py py-class docutils literal"><span class="pre">opal.core.data.Data</span></tt></a></p>
+<p>An abstract class to represent real, integer and categorical algorithmic
+parameters. Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">()</span>        <span class="c"># A real parameter with no default value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;integer&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">choice</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;categorical&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Parameters can be given a name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">delmin</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;DELMIN&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Their value can be changed from their default value:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">delmin</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Their default value is still available:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">delmin</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+<span class="go">1.0e-3</span>
+</pre></div>
+</div>
+<p>The bounds on a parameter may be a tuple indicating the lower and upper
+bounds if the parameter has an ordered kind, such as integer or real. 
+Otherwise, <cite>bound</cite> is a set of feasible values.</p>
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.export_to_dict">
+<tt class="descname">export_to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.export_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <cite>Parameter</cite> object to a dictionary.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This does not include the bounds!!!</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.get">
+<tt class="descname">get</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.get_bound">
+<tt class="descname">get_bound</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.get_bound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return bounds on the parameter.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.get_default">
+<tt class="descname">get_default</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return default value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.get_dimension">
+<tt class="descname">get_dimension</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.get_dimension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.get_domain">
+<tt class="descname">get_domain</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.get_domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.get_kind">
+<tt class="descname">get_kind</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.get_kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return parameter kind.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.get_type">
+<tt class="descname">get_type</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.get_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.identify">
+<tt class="descname">identify</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.identify" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method provide the identity of a Data object. By default, 
+the name is considered as the identity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.is_const">
+<tt class="descname">is_const</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.is_const" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if parameter is being treated as a constant.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.is_valid">
+<tt class="descname">is_valid</tt><big>(</big><em>value=None</em><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether or not the specified value falls within the allowed
+range for this parameter. If <cite>value</cite> is None, the current value of
+the parameter is used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.set">
+<tt class="descname">set</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.set_as_const">
+<tt class="descname">set_as_const</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.set_as_const" title="Permalink to this definition">¶</a></dt>
+<dd><p>Treat parameter as a constant.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.set_bound">
+<tt class="descname">set_bound</tt><big>(</big><em>bound</em><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.set_bound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set bounds on the parameter. For parameters of ordered kind,
+<cite>set_bound((None, 0))</cite> means that the lower bound is unchanged while
+the upper bound is reset to zero. For parameters of unordered kind,
+<cite>set_bound</cite> simply reassigns the list of feasible values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.set_default">
+<tt class="descname">set_default</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.set_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set default value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.parameter.Parameter.set_value">
+<tt class="descname">set_value</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#opal.core.parameter.Parameter.set_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set parameter value to a non-default value.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opal.core.parameter.ParameterConstraint">
+<em class="property">class </em><tt class="descclassname">opal.core.parameter.</tt><tt class="descname">ParameterConstraint</tt><big>(</big><em>constraintStr=''</em>, <em>*argv</em><big>)</big><a class="headerlink" href="#opal.core.parameter.ParameterConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Document this class!!!</p>
+</div>
+<dl class="attribute">
+<dt id="opal.core.parameter.ParameterConstraint.violated">
+<tt class="descname">violated</tt><em class="property"> = False</em><a class="headerlink" href="#opal.core.parameter.ParameterConstraint.violated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="measure">
+<h3>3.2.2. Measure<a class="headerlink" href="#measure" title="Permalink to this headline">¶</a></h3>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/Users/kiendc/src/opal/doc/reference/source/opal.rst</tt>, line 66)</p>
+Could not execute &#8216;dot&#8217;.  Are you sure you have &#8216;graphviz&#8217; installed?</div>
+<span class="target" id="module-opal.core.measure"></span><dl class="class">
+<dt id="opal.core.measure.Measure">
+<em class="property">class </em><tt class="descclassname">opal.core.measure.</tt><tt class="descname">Measure</tt><big>(</big><em>name=None</em>, <em>description=''</em>, <em>kind=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.measure.Measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opal.core.data.Data" title="opal.core.data.Data"><tt class="xref py py-class docutils literal"><span class="pre">opal.core.data.Data</span></tt></a></p>
+<p>A Measure object represent for an observation from output of 
+algorithm running. It has two aspect
+- Data: its value is value of an observation 
+- Functionality: It encapsulates the way to extract measure value</p>
+<blockquote>
+<div>from the output.</div></blockquote>
+<dl class="method">
+<dt id="opal.core.measure.Measure.get">
+<tt class="descname">get</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.measure.Measure.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.measure.Measure.get_dimension">
+<tt class="descname">get_dimension</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.measure.Measure.get_dimension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.measure.Measure.get_domain">
+<tt class="descname">get_domain</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.measure.Measure.get_domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.measure.Measure.get_type">
+<tt class="descname">get_type</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.measure.Measure.get_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.measure.Measure.identify">
+<tt class="descname">identify</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.measure.Measure.identify" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method provide the identity of a Data object. By default, 
+the name is considered as the identity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.measure.Measure.set">
+<tt class="descname">set</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#opal.core.measure.Measure.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="measuretable">
+<h3>3.2.3. MeasureTable<a class="headerlink" href="#measuretable" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="problem">
+<h3>3.2.4. Problem<a class="headerlink" href="#problem" title="Permalink to this headline">¶</a></h3>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">/Users/kiendc/src/opal/doc/reference/source/opal.rst</tt>, line 88)</p>
+Could not execute &#8216;dot&#8217;.  Are you sure you have &#8216;graphviz&#8217; installed?</div>
+<span class="target" id="module-opal.core.testproblem"></span><dl class="class">
+<dt id="opal.core.testproblem.TestProblem">
+<em class="property">class </em><tt class="descclassname">opal.core.testproblem.</tt><tt class="descname">TestProblem</tt><big>(</big><em>name='Test Problem'</em>, <em>description=None</em>, <em>classifyStr=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.testproblem.TestProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract class to describe a test problem in general form.
+Every test problem class is a sub-class of this class.
+The <tt class="docutils literal"><span class="pre">TestProblem</span></tt> class contains only basic information about the
+test problem: the problem name and a description (both strings).
+Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">chem</span><span class="o">=</span><span class="n">TestProblem</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Nuke&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">&#39;Chemical reactor&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">chem</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">chem</span><span class="o">.</span><span class="n">description</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="opal.core.testproblem.TestProblem.get_classify_string">
+<tt class="descname">get_classify_string</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.TestProblem.get_classify_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.testproblem.TestProblem.get_description">
+<tt class="descname">get_description</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.TestProblem.get_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.testproblem.TestProblem.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.TestProblem.get_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.testproblem.TestProblem.identify">
+<tt class="descname">identify</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.TestProblem.identify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opal.core.testproblem.OptimizationTestProblem">
+<em class="property">class </em><tt class="descclassname">opal.core.testproblem.</tt><tt class="descname">OptimizationTestProblem</tt><big>(</big><em>name='Optimization Problem'</em>, <em>description=None</em>, <em>classifyStr=None</em>, <em>nvar=0</em>, <em>ncon=0</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.testproblem.OptimizationTestProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opal.core.testproblem.TestProblem" title="opal.core.testproblem.TestProblem"><tt class="xref py py-class docutils literal"><span class="pre">opal.core.testproblem.TestProblem</span></tt></a></p>
+<p>An abstract class to represent a test problem in the field of optimization.
+Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">hs26</span> <span class="o">=</span> <span class="n">OptimizationTestProblem</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;HS26&#39;</span><span class="p">,</span> <span class="n">nvar</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncon</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">hs26</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">hs26</span><span class="o">.</span><span class="n">nvar</span><span class="p">,</span> <span class="n">hs26</span><span class="o">.</span><span class="n">ncon</span>
+<span class="go">HS26 3 1</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="opal.core.testproblem.OptimizationTestProblem.get_classify_string">
+<tt class="descname">get_classify_string</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.OptimizationTestProblem.get_classify_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.testproblem.OptimizationTestProblem.get_description">
+<tt class="descname">get_description</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.OptimizationTestProblem.get_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.testproblem.OptimizationTestProblem.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.OptimizationTestProblem.get_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.testproblem.OptimizationTestProblem.identify">
+<tt class="descname">identify</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.testproblem.OptimizationTestProblem.identify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="parameter-optimization-problem-definition">
+<h2>3.3. Parameter Optimization Problem Definition<a class="headerlink" href="#parameter-optimization-problem-definition" title="Permalink to this headline">¶</a></h2>
+<p>In the OPAL framework, a parameter optimization model (shortly OPAL model) has
+the following components:</p>
+<ol class="arabic simple">
+<li>A structure, which is a sort of optimization problem template, disconnected
+from any specifics such as the particular algorithm being tuned or the particular
+test set used to tune the parameters. An example of problem structure may
+be as simple as &#8220;minimize the total CPU time&#8221; or &#8220;maximize the throughput
+subject to network constraints.&#8221;</li>
+<li>Data, which fills in the blanks and brings the model to life. Data, in a
+sense, instantiates the problem structure by populating it with the
+particular algorithm being tuned, the parameters being fine-tuned, the test
+set, etc.</li>
+</ol>
+<p>Instead of <tt class="docutils literal"><span class="pre">problem</span></tt>, we will often use the term <tt class="docutils literal"><span class="pre">model</span></tt> and we will refer
+to its components as the <tt class="docutils literal"><span class="pre">model</span> <span class="pre">structure</span></tt> and <tt class="docutils literal"><span class="pre">model</span> <span class="pre">data</span></tt>.</p>
+<p>Once the model structure and model data have been defined, we can put them
+together into a single composite object representing the parameter optimization
+problem. It is then referred to as a <tt class="docutils literal"><span class="pre">model</span></tt>.</p>
+<div class="section" id="module-opal.core.algorithm">
+<span id="algorithm-experiment"></span><h3>3.3.1. Algorithm experiment<a class="headerlink" href="#module-opal.core.algorithm" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="opal.core.algorithm.Algorithm">
+<em class="property">class </em><tt class="descclassname">opal.core.algorithm.</tt><tt class="descname">Algorithm</tt><big>(</big><em>name=None</em>, <em>description=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>An abstract class to define the specifics of a wrapper of an algorithm. 
+An object of this class represents to an executable 
+wrapper of target algorithm. It provokes the target
+algorithm to solve a problem and collects the elementary
+measures</p>
+<p>An object of this class works as an interface of the target algorithm 
+with OPAL. It contains at least three informations:</p>
+<ol class="arabic simple">
+<li>What are the parammeters</li>
+<li>How to invoke the algorithm to solve a problem</li>
+<li>What are the measures we get after running algorithm</li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">name:</th><td class="field-body">Name of the algorithm (string)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">purpose:</th><td class="field-body">Synopsis of purpose (string)</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Each algorithm has two aspect:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Algorithmic aspect: the name, purpose, parameters, measures and the
+constraints on the parameters. The measures represent the output of the
+alorithm.</li>
+<li>Computational aspect: the description of how to run algorithm and what
+the output is.</li>
+</ol>
+</div></blockquote>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dfo</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;DFO&#39;</span><span class="p">,</span> <span class="n">purpose</span><span class="o">=</span><span class="s">&#39;Derivative-free optimization&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delmin</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;DELMIN&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfo</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="n">delmin</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxit</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;integer&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;MAXIT&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfo</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="n">maxit</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cpuTime</span> <span class="o">=</span> <span class="n">Measure</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;real&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;TIME&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfo</span><span class="o">.</span><span class="n">add_measure</span><span class="p">(</span><span class="n">cpuTime</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">dfo</span><span class="o">.</span><span class="n">parameters</span><span class="p">]</span>
+<span class="go">[&#39;DELMIN&#39;, &#39;MAXIT&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">dfo</span><span class="o">.</span><span class="n">parameters</span> <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">is_real</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">real_params</span><span class="p">]</span>
+<span class="go">[&#39;DELMIN&#39;]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.add_measure">
+<tt class="descname">add_measure</tt><big>(</big><em>measure</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.add_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a measure to an algorithm</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.add_param">
+<tt class="descname">add_param</tt><big>(</big><em>param</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.add_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to an algorithm</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.add_parameter_constraint">
+<tt class="descname">add_parameter_constraint</tt><big>(</big><em>paramConstraint</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.add_parameter_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the domain of a parameter.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.are_parameters_valid">
+<tt class="descname">are_parameters_valid</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.are_parameters_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if all parameters are in their domain and satisfy the
+constraints. Return False otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.create_tag">
+<tt class="descname">create_tag</tt><big>(</big><em>problem</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.create_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.read_measure">
+<tt class="descname">read_measure</tt><big>(</big><em>fileName</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.read_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ths virtual method determines how to  measure value from the
+output of the algorithm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">problem:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">measures:</th><td class="field-body">List of measures we want to extract</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A mapping measure name &#8211;&gt; measure value</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>By default, the algorithm returns the measure values to the standard
+output. In the <cite>run()</cite> method, the output is redirected to file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.set_executable_command">
+<tt class="descname">set_executable_command</tt><big>(</big><em>command</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.set_executable_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.solve">
+<tt class="descname">solve</tt><big>(</big><em>problem</em>, <em>parameters=None</em>, <em>parameterTag=None</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.solve" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Why do we need <cite>paramValues</cite> here???
+What kind of object is <cite>problem</cite>???</p>
+</div>
+<p>This virtual method determines how to run the algorithm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><table class="first docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">paramValues:</th><td class="field-body">List of parameter values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">problem:</th><td class="field-body">Problem (???)</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The command for executing the algorithm.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>By default, the algorithm is called by the command</p>
+<blockquote>
+<div><cite>./algorithm paramfile problem</cite></div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.update_parameters">
+<tt class="descname">update_parameters</tt><big>(</big><em>parameters</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.update_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method return an unique identity for the 
+test basing on the parameter values</p>
+<p>The identity obtains by hashing the parameter values string. 
+This is an inversable function. It means that we can get 
+the parameter_values form the id</p>
+<p>This virtual method determines how values for the parameters of the
+algorithm are written to intermediated file that are read after by 
+algorithm driver.</p>
+<p>The format of intermediated file depend on this method. By default, 
+the parameter set are written by pickle.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="opal.core.algorithm.Algorithm.write_parameter">
+<tt class="descname">write_parameter</tt><big>(</big><em>fileName</em><big>)</big><a class="headerlink" href="#opal.core.algorithm.Algorithm.write_parameter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p>The most important ingredients of an algorithmic parameter optimization problem
+are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The algorithm to be fine tuned,</li>
+<li>The parameters to fine tune,</li>
+<li>The measures defining the performance criterion.</li>
+</ol>
+</div></blockquote>
+<p>In this section, we examine the basic ingredients in detail.</p>
+</div>
+<div class="section" id="module-opal.core.modelstructure">
+<span id="modelstructure"></span><h3>3.3.2. ModelStructure<a class="headerlink" href="#module-opal.core.modelstructure" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="opal.core.modelstructure.ModelStructure">
+<em class="property">class </em><tt class="descclassname">opal.core.modelstructure.</tt><tt class="descname">ModelStructure</tt><big>(</big><em>name='modelstruct'</em>, <em>objective=None</em>, <em>constraints=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.modelstructure.ModelStructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object of this class represent for the model structure that is 
+described in Python language. The evaluator accept only ModelStructure 
+object as structure of model. Any structure modeled by other language 
+such as AMPL has to be rewritten as a ModelStructure object. This 
+can be done by the interpreters.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-opal.core.modeldata">
+<span id="modeldata"></span><h3>3.3.3. ModelData<a class="headerlink" href="#module-opal.core.modeldata" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="opal.core.modeldata.ModelData">
+<em class="property">class </em><tt class="descclassname">opal.core.modeldata.</tt><tt class="descname">ModelData</tt><big>(</big><em>algorithm</em>, <em>problems=</em><span class="optional">[</span><span class="optional">]</span>, <em>parameters=None</em>, <em>measures=None</em>, <em>neighborhoods=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#opal.core.modeldata.ModelData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents a data generator for a parameter optimization
+problem. The data is the values of the elementary measures that are needed
+to formulate the problem. To specify a data generator, we need provide:</p>
+<ol class="arabic simple">
+<li>The algorithm</li>
+<li>the set of elementary measures concerned</li>
+<li>the set of parameters to control</li>
+<li>the test problems set.</li>
+</ol>
+<dl class="method">
+<dt id="opal.core.modeldata.ModelData.get_algorithm">
+<tt class="descname">get_algorithm</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.modeldata.ModelData.get_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.modeldata.ModelData.get_measures">
+<tt class="descname">get_measures</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.modeldata.ModelData.get_measures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.modeldata.ModelData.get_parameters">
+<tt class="descname">get_parameters</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.modeldata.ModelData.get_parameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.modeldata.ModelData.get_problems">
+<tt class="descname">get_problems</tt><big>(</big><big>)</big><a class="headerlink" href="#opal.core.modeldata.ModelData.get_problems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.modeldata.ModelData.load">
+<tt class="descname">load</tt><big>(</big><em>fileName</em><big>)</big><a class="headerlink" href="#opal.core.modeldata.ModelData.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="opal.core.modeldata.ModelData.save">
+<tt class="descname">save</tt><big>(</big><em>fileName</em><big>)</big><a class="headerlink" href="#opal.core.modeldata.ModelData.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="model">
+<h3>3.3.4. Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="4. API Documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="2. Tutorial: Simple tasks of Parameter Optimization"
+             >previous</a> |</li>
+        <li><a href="index.html">OPAL home</a>&nbsp;|&nbsp;</li>
+        <li><a href="contents.html">Documentation</a>
+          &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, C. Audet, K. C. Dang, D. Orban.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

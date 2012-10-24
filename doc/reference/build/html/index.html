@@ -1,0 +1,212 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview &mdash; opal 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://mathjax.connectmv.com/MathJax.js"></script>
+    <link rel="top" title="opal 0.1 documentation" href="#" />
+ 
+<style type="text/css">
+  table.right { float: right; margin-left: 20px; }
+  table.right td { border: 1px solid #ccc; }
+</style>
+
+  </head>
+  <body>
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<!-- <img src="_static/sphinx.png" alt="Sphinx logo" /> -->
+<h1>OPAL&mdash;Optimization of Algorithms</h1>
+
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">OPAL home</a>&nbsp;|&nbsp;</li>
+        <li><a href="contents.html">Documentation</a>
+          &raquo;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+<!-- <a href="http://pocoo.org/">
+  <img src="_static/pocoo.png" /></a> -->
+</p>
+
+<h3>Download</h3>
+
+<p>Current version: <b>0.1</b></p>
+<p>Get OPAL's <a href="http://www.gerad.ca/~kiendc/build/opal-0.1"> stable version
+</a>, or browse the <a href="http://www.gerad.ca/~kiendc/downloads/"> repository </a> </p>
+<p>Latest <a href="http://www.gerad.ca/~kiendc/build/html/">development version docs</a>
+are also available.</p>
+
+
+<h3>Questions? Suggestions?</h3>
+<form id="fbform" action="">
+
+<label for="user">Name</label>
+<input type="text" id="user" value="" />
+</p>
+
+<p>
+<label for="emailaddress">Email Address:</label>
+<input type="text" id="emailaddress" value="" />
+</p>
+
+<p>
+<label for="comments">Feedback:</label>
+<textarea id="comments" rows="5" cols="25"></textarea>
+</p>
+
+<div>
+<input type="submit" value="Submit" />
+<input  style="margin-right: 0px;" type="reset" value="reset" />
+</div>
+</form>
+<p>or write to <a href="mailto:kiendc@gerad.ca">us</a>.
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+
+<h1>Welcome</h1>
+
+<div class="quotebar">
+  <p><em>What authors say:</em></p>
+  <p>&ldquo;Enjoy trying a tool that optimizes an algorithm in a snap!&rdquo;</p>
+</div>
+
+<p>
+  OPAL stands for <b>Optimization of Algorithm</b>. OPAL provides a framework in
+  which algorithmic parameter optimization problems can be defined and solved
+  in a programmatic way.
+</p>
+<!--
+<p>
+  Our approach is to formulate a parameter optimization problem as a <em>black box
+  optimization problem</em>. This is different from heuristic approaches that
+  uses heuristic to minimize the running time as unique goal. The formulated
+  blackbox has the objective function and constraints built from parameter values
+  and elementary measures obtained from empirical tests. Hence, the users can
+  optimize his algorithm in any aspect and exploit any algorithmic parameter.
+  The blackbox problem is solved by a direct-search solver.
+  </p>
+-->
+<!--
+<p>
+    A parameter optimization procedure with OPAL has three steps:</p>
+  <ul>
+    <li>Describe the target algorithm</li>
+    <li>Define the optimization problem</li>
+    <li>Choose a suitable solver to solve the problem</li>
+  </ul>
+</p>
+-->
+<p>
+  OPAL is written in Python and uses Python as the language in which the parameter
+  optimization problem is described. The procedure consists in three main steps:
+  declare the target algorithm, define an optimization problem and choose a
+  suitable solver.
+ </p>
+
+<h2>Documentation</h2>
+
+<table class="contentstable" align="center" style="margin-left: 30px"><tr>
+    <td width="50%">
+      <p class="biglink"><a class="biglink" href="tutorial.html">Very simple tutorial</a><br/>
+        <span class="linkdescr">overview of basic tasks</span></p>
+      <p class="biglink"><a class="biglink" href="contents.html">Contents</a><br/>
+        <span class="linkdescr">for a complete overview</span></p>
+    </td><td width="50%">
+      <p class="biglink"><a class="biglink" href="search.html">Search page</a><br/>
+        <span class="linkdescr">search the documentation</span></p>
+      <p class="biglink"><a class="biglink" href="genindex.html">General Index</a><br/>
+        <span class="linkdescr">all functions, classes, terms</span></p>
+  </td></tr>
+</table>
+
+
+<h2>Examples</h2>
+<p>Links to some examples can be found in the
+  <a href="tutorial.html">Tutorial section</a>.
+</p>
+
+<h2>Get OPAL</h2>
+<p>
+  OPAL is available from
+  <a href="http://www.gerad.ca/~kiendc/packages">www.gerad.ca/~kiendc/packages</a>.
+</p>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">OPAL home</a>&nbsp;|&nbsp;</li>
+        <li><a href="contents.html">Documentation</a>
+          &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2011, C. Audet, K. C. Dang, D. Orban.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
